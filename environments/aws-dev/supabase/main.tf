@@ -24,22 +24,6 @@ resource "aws_default_subnet" "default_2" {
   })
 }
 
-# cert 
-# this cert is dns validated externally by the user (by adding a cname record(provided by aws) to the domain)
-resource "aws_acm_certificate" "cert" {
-  count             = 1
-  domain_name       = "supabase.unreal.art"
-  validation_method = "DNS"
-
-  tags = merge(local.dev_env_tag, {
-    Environment = "Dev"
-  })
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 resource "aws_security_group" "alb_sg" {
   count  = 1
   name   = "alb-sg"
@@ -52,31 +36,10 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -87,18 +50,6 @@ resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.supabase[0].arn
   port              = 80
   protocol          = "HTTP"
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.supabase[0].arn
-  }
-}
-
-resource "aws_lb_listener" "https" {
-  count             = 1
-  load_balancer_arn = aws_lb.supabase[0].arn
-  port              = 443
-  protocol          = "HTTPS"
-  certificate_arn   = aws_acm_certificate.cert[0].arn
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.supabase[0].arn
