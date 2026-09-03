@@ -4,6 +4,8 @@ locals {
   }
 }
 
+
+
 resource "aws_default_vpc" "default" {
   tags = merge(local.dev_env_tag, {
     Name = "default-vpc"
