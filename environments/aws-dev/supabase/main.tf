@@ -104,7 +104,7 @@ module "vm" {
   subnet_id                   = aws_default_subnet.default.id
   region                      = "eu-central-1"
   associate_public_ip_address = true
-  public_key                  = file("/Users/vishaltewatia/.ssh/aws-supabase-instance.pub")
+  public_key                  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCp+qajMCD3NGi/4R0ofqFgKSUgs6C23h9StJRlmaUI/Ijzn5opoyy/lbuN9f3mBeQ9xFlo/HecyjH46NjXwEVbQFF34GTZZDh7do5vILqmTY0ycrlJngirHR5UvSj505n9GOktXBtav3dpMHLypas7GbFprvxlLqYPi2D1UGfJyntJN98+aMKuWLrYEUJ4VG8XrVnd45kf0XYdDl+vAl/q1dPaqkkrlU0I0a4CFgdb/6jxp292CIqX8b3LYWNARNODXh58uQuul+1m5h0BxYQu50VNXOIXjdiSTI1hSAMFsvUD23GR9lrfojJEJFHQrxoFtXASS813+R+3f8TJ9CbMmt3wrRQCoCd5D1ZiD/THLhESBpIBPo1Z+cobrDh5b+yxa7FoUyuXv0SHIVwdXrRz+d9ugTOR7m3hOlrTxrv+5LQvD7jMFmNN8rjXJaShYRrX2PLcnf+ub6FyYTJUn1/3NyQKzbcjiymCqEHYzxIDA7hedtAGtiI+eUOhklaxJ2qDLCX4IHRifkkLM32S8FXPaOx4YkfEh7gTSPJ85JyVB427TiUdtvJvjvulz+lba5dMa9qYrc8Y3GgNsVN3zx8cc6Exma6QHfWKkDWGtrCf67M9z8vFT4IKOy3oSNDTy04hqNdHrHm/N4OVh9s7Z3tqDTCWTVygbANcXimNXt8EiQ== vishaltewatia@Vishals-MacBook-Pro.local"
   install_docker_on_boot      = true
   mount_external_disk_on_boot = true
   root_block_device_size      = 20
