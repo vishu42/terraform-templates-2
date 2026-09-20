@@ -6,6 +6,7 @@ locals {
 
 
 
+
 resource "aws_default_vpc" "default" {
   tags = merge(local.common_tags, {
     Name = "default-vpc"
