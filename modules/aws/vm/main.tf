@@ -11,7 +11,7 @@ resource "aws_instance" "vm" {
   subnet_id                   = var.subnet_id
   key_name                    = aws_key_pair.key_pair.key_name
   user_data                   = join("", [
-    file("../../../scripts/startup.sh"),
+    file("${path.module}/../../../scripts/startup.sh"),
     "\n\n# Execute startup script with Terraform-provided flags\n",
     "main",
     var.install_docker_on_boot ? " --install-docker" : "",
